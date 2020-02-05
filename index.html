@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Read Products </title>
+  <link rel="stylesheet" href="http://localhost/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://localhost/oop/libs/css/custom.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class='page-header'>
+      <h1>Read Products</h1>
+    </div>
+    <form role='search' action='search.php'>
+      <div class='input-group col-md-3 pull-left margin-right-1em'>
+        <input type='text' class='form-control' placeholder='Type product name or description...' name='s' id='srch-term' required />
+        <div class='input-group-btn'>
+          <button class='btn btn-primary' type='submit'><i class='glyphicon glyphicon-search'></i></button>
+        </div>
+      </div>
+    </form>
+    <div class='right-button-margin'>
+      <a href='create_product.php' class='btn btn-primary pull-right'>
+        <span class='glyphicon glyphicon-plus'></span> Create Product
+      </a>
+    </div>
+    <table class='table table-hover table-responsive table-bordered'>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <td>Abercrombie Allen Brook Shirt </td>
+        <td>70</td>
+        <td>Cool sred shirt!</td>
+        <td>
+          Fashion </td>
+        <td>
+          <a href='read_one.php?id=13' class='btn btn-primary left-margin'>
+            <span class='glyphicon glyphicon-list'></span> Read
+          </a>
+          <a href='update_product.php?id=13' class='btn btn-info left-margin'>
+            <span class='glyphicon glyphicon-edit'></span> Edit
+          </a>
+          <a delete-id='13' class='btn btn-danger delete-object'>
+            <span class='glyphicon glyphicon-remove'></span> Delete
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Abercrombie Lake Arnold Shirt </td>
+        <td>60</td>
+        <td>Perfect as gift!</td>
+        <td>
+          Fashion </td>
+        <td>
+          <a href='read_one.php?id=12' class='btn btn-primary left-margin'>
+            <span class='glyphicon glyphicon-list'></span> Read
+          </a>
+          <a href='update_product.php?id=12' class='btn btn-info left-margin'>
+            <span class='glyphicon glyphicon-edit'></span> Edit
+          </a>
+          <a delete-id='12' class='btn btn-danger delete-object'>
+            <span class='glyphicon glyphicon-remove'></span> Delete
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Amanda Waller Shirt </td>
+        <td>333</td>
+        <td>New awesome shirt!</td>
+        <td>
+          Fashion </td>
+        <td>
+          <a href='read_one.php?id=31' class='btn btn-primary left-margin'>
+            <span class='glyphicon glyphicon-list'></span> Read
+          </a>
+          <a href='update_product.php?id=31' class='btn btn-info left-margin'>
+            <span class='glyphicon glyphicon-edit'></span> Edit
+          </a>
+          <a delete-id='31' class='btn btn-danger delete-object'>
+            <span class='glyphicon glyphicon-remove'></span> Delete
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Another product </td>
+        <td>555</td>
+        <td>Awesome product!</td>
+        <td>
+          Electronics </td>
+        <td>
+          <a href='read_one.php?id=26' class='btn btn-primary left-margin'>
+            <span class='glyphicon glyphicon-list'></span> Read
+          </a>
+          <a href='update_product.php?id=26' class='btn btn-info left-margin'>
+            <span class='glyphicon glyphicon-edit'></span> Edit
+          </a>
+          <a delete-id='26' class='btn btn-danger delete-object'>
+            <span class='glyphicon glyphicon-remove'></span> Delete
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Bag </td>
+        <td>999</td>
+        <td>Awesome bag for you!</td>
+        <td>
+          Fashion </td>
+        <td>
+          <a href='read_one.php?id=27' class='btn btn-primary left-margin'>
+            <span class='glyphicon glyphicon-list'></span> Read
+          </a>
+          <a href='update_product.php?id=27' class='btn btn-info left-margin'>
+            <span class='glyphicon glyphicon-edit'></span> Edit
+          </a>
+          <a delete-id='27' class='btn btn-danger delete-object'>
+            <span class='glyphicon glyphicon-remove'></span> Delete
+          </a>
+        </td>
+      </tr>
+    </table>
+    <ul class="pagination">
+      <li class='active'><a href="#">1<span class="sr-only">current</span></a></li>
+      <li><a href='index.php?page=2'>2</a></li>
+      <li><a href='index.php?page=3'>3</a></li>
+      <li><a href='index.php?page=4' title='Last page is 4.'>Last Page</a></li>
+    </ul>
+  </div>
+  <script src="http://localhost/jquery.js"></script>
+  <script src="http://localhost/js/bootstrap.min.js"></script>
+  <script src="http://localhost/bootbox.min.js"></script>
+  <script>
+  // JavaScript for deleting product
+  $(document).on('click', '.delete-object', function() {
+    var id = $(this).attr('delete-id');
+    bootbox.confirm({
+      message: "<h4>Are you sure?</h4>",
+      buttons: {
+        confirm: {
+          label: '<span class="glyphicon glyphicon-ok"></span> Yes',
+          className: 'btn-danger'
+        },
+        cancel: {
+          label: '<span class="glyphicon glyphicon-remove"></span> No',
+          className: 'btn-primary'
+        }
+      },
+      callback: function(result) {
+        if (result == true) {
+          $.post('delete_product.php', {
+            object_id: id
+          }, function(data) {
+            location.reload();
+          }).fail(function() {
+            alert('Unable to delete.');
+          });
+        }
+      }
+    });
+    return false;
+  });
+  </script>
+</body>
+
+</html>
