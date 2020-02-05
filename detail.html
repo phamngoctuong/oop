@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Read One Product  </title>
+  <link rel="stylesheet" href="http://localhost/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://localhost/oop/libs/css/custom.css" />
+</head>
+<body>
+	<div class="container">
+	<div class='page-header'>
+	    <h1>Read One Product</h1>
+	  </div><div class='right-button-margin'>
+    <a href='index.php' class='btn btn-primary pull-right'>
+      <span class='glyphicon glyphicon-list'></span> Read Products
+    </a>
+</div>
+<table class='table table-hover table-responsive table-bordered'>
+  <tr>
+    <td>Name</td>
+    <td>Abercrombie Allen Brook Shirt </td>
+  </tr>
+  <tr>
+    <td>Price</td>
+    <td>&#36;70</td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td>Cool red shirt!</td>
+  </tr>
+  <tr>
+    <td>Category</td>
+    <td>
+    	Fashion    </td>
+  </tr>
+  <tr>
+    <td>Image</td>
+    <td>
+    		<img src='uploads/465bcf53428b819eb0016cece9178b220c3a5b9a-7.jpg' style='width:300px;' />    </td>
+	</tr>
+</table>
+	</div>
+<script src="http://localhost/jquery.js"></script>
+<script src="http://localhost/js/bootstrap.min.js"></script>
+<script src="http://localhost/bootbox.min.js"></script>
+<script>
+// JavaScript for deleting product
+$(document).on('click', '.delete-object', function() {
+  var id = $(this).attr('delete-id');
+  bootbox.confirm({
+    message: "<h4>Are you sure?</h4>",
+    buttons: {
+      confirm: {
+        label: '<span class="glyphicon glyphicon-ok"></span> Yes',
+        className: 'btn-danger'
+      },
+      cancel: {
+        label: '<span class="glyphicon glyphicon-remove"></span> No',
+        className: 'btn-primary'
+      }
+    },
+    callback: function(result) {
+      if (result == true) {
+        $.post('delete_product.php', {
+          object_id: id
+        }, function(data) {
+          location.reload();
+        }).fail(function() {
+          alert('Unable to delete.');
+        });
+      }
+    }
+  });
+  return false;
+});
+</script>
+</body>
+</html>
