@@ -19,5 +19,11 @@
 	    $stmt->execute();
 	    return $stmt;
 		}
+		public function countAll() {
+			$query = "SELECT count(*) as total FROM {$this->table}";
+			$stmt  = $this->conn->prepare($query);
+	    $stmt->execute();
+	    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+		}
 	}
 ?>

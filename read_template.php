@@ -20,7 +20,7 @@
     <th>Actions</th>
   </tr>
   	<?php  
-  		while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  		while ( $row = $readall->fetch(PDO::FETCH_ASSOC)) {
   	?>
   	<tr>
 	  	<td><?php echo $row['name'] ?></td>
