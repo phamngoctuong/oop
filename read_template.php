@@ -33,13 +33,13 @@
 	    	?>
 	    </td>
 	    <td>
-	      <a href='read_one.php?id=13' class='btn btn-primary left-margin'>
+	      <a href='read_one.php?id=<?php echo $row['id']; ?>' class='btn btn-primary left-margin'>
 	        <span class='glyphicon glyphicon-list'></span> Read
 	      </a>
-	      <a href='update_product.php?id=13' class='btn btn-info left-margin'>
+	      <a href='update_product.php?id=<?php echo $row['id']; ?>' class='btn btn-info left-margin'>
 	        <span class='glyphicon glyphicon-edit'></span> Edit
 	      </a>
-	      <a delete-id='13' class='btn btn-danger delete-object'>
+	      <a delete-id='<?php echo $row['id']; ?>' class='btn btn-danger delete-object'>
 	        <span class='glyphicon glyphicon-remove'></span> Delete
 	      </a>
 	    </td>

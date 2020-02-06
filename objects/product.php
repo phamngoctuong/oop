@@ -25,5 +25,11 @@
 	    $stmt->execute();
 	    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 		}
+		public function readOne() {
+			$query = "SELECT * FROM {$this->table} WHERE id={$this->id}";
+			$stmt  = $this->conn->prepare($query);
+	    $stmt->execute();
+	    return $stmt;
+		}
 	}
 ?>
