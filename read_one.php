@@ -12,6 +12,11 @@
 	$readone = $product->readOne();
 	$one = $readone->fetch(PDO::FETCH_ASSOC);
 ?>
+<div class='right-button-margin'>
+  <a href='index.php' class='btn btn-primary pull-right'>
+    <span class='glyphicon glyphicon-list'></span> Read Products
+  </a>
+</div>
 <table class='table table-hover table-responsive table-bordered'>
   <tr>
     <td>Name</td>
