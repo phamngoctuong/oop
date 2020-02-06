@@ -19,96 +19,34 @@
     <th>Category</th>
     <th>Actions</th>
   </tr>
-  <tr>
-    <td>Abercrombie Allen Brook Shirt </td>
-    <td>70</td>
-    <td>Cool sred shirt!</td>
-    <td>
-      Fashion </td>
-    <td>
-      <a href='read_one.php?id=13' class='btn btn-primary left-margin'>
-        <span class='glyphicon glyphicon-list'></span> Read
-      </a>
-      <a href='update_product.php?id=13' class='btn btn-info left-margin'>
-        <span class='glyphicon glyphicon-edit'></span> Edit
-      </a>
-      <a delete-id='13' class='btn btn-danger delete-object'>
-        <span class='glyphicon glyphicon-remove'></span> Delete
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>Abercrombie Lake Arnold Shirt </td>
-    <td>60</td>
-    <td>Perfect as gift!</td>
-    <td>
-      Fashion </td>
-    <td>
-      <a href='read_one.php?id=12' class='btn btn-primary left-margin'>
-        <span class='glyphicon glyphicon-list'></span> Read
-      </a>
-      <a href='update_product.php?id=12' class='btn btn-info left-margin'>
-        <span class='glyphicon glyphicon-edit'></span> Edit
-      </a>
-      <a delete-id='12' class='btn btn-danger delete-object'>
-        <span class='glyphicon glyphicon-remove'></span> Delete
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>Amanda Waller Shirt </td>
-    <td>333</td>
-    <td>New awesome shirt!</td>
-    <td>
-      Fashion </td>
-    <td>
-      <a href='read_one.php?id=31' class='btn btn-primary left-margin'>
-        <span class='glyphicon glyphicon-list'></span> Read
-      </a>
-      <a href='update_product.php?id=31' class='btn btn-info left-margin'>
-        <span class='glyphicon glyphicon-edit'></span> Edit
-      </a>
-      <a delete-id='31' class='btn btn-danger delete-object'>
-        <span class='glyphicon glyphicon-remove'></span> Delete
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>Another product </td>
-    <td>555</td>
-    <td>Awesome product!</td>
-    <td>
-      Electronics </td>
-    <td>
-      <a href='read_one.php?id=26' class='btn btn-primary left-margin'>
-        <span class='glyphicon glyphicon-list'></span> Read
-      </a>
-      <a href='update_product.php?id=26' class='btn btn-info left-margin'>
-        <span class='glyphicon glyphicon-edit'></span> Edit
-      </a>
-      <a delete-id='26' class='btn btn-danger delete-object'>
-        <span class='glyphicon glyphicon-remove'></span> Delete
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>Bag </td>
-    <td>999</td>
-    <td>Awesome bag for you!</td>
-    <td>
-      Fashion </td>
-    <td>
-      <a href='read_one.php?id=27' class='btn btn-primary left-margin'>
-        <span class='glyphicon glyphicon-list'></span> Read
-      </a>
-      <a href='update_product.php?id=27' class='btn btn-info left-margin'>
-        <span class='glyphicon glyphicon-edit'></span> Edit
-      </a>
-      <a delete-id='27' class='btn btn-danger delete-object'>
-        <span class='glyphicon glyphicon-remove'></span> Delete
-      </a>
-    </td>
-  </tr>
+  	<?php  
+  		while ( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  	?>
+  	<tr>
+	  	<td><?php echo $row['name'] ?></td>
+	    <td><?php echo $row['price'] ?></td>
+	    <td><?php echo $row['description'] ?></td>
+	    <td>
+	    	<?php 
+	    		$category->id = $row['category_id'];
+		    	echo $category->readName();
+	    	?>
+	    </td>
+	    <td>
+	      <a href='read_one.php?id=13' class='btn btn-primary left-margin'>
+	        <span class='glyphicon glyphicon-list'></span> Read
+	      </a>
+	      <a href='update_product.php?id=13' class='btn btn-info left-margin'>
+	        <span class='glyphicon glyphicon-edit'></span> Edit
+	      </a>
+	      <a delete-id='13' class='btn btn-danger delete-object'>
+	        <span class='glyphicon glyphicon-remove'></span> Delete
+	      </a>
+	    </td>
+	  </tr>
+  	<?php
+  		}
+		?>
 </table>
 <?php  
 	require_once "paging.php";

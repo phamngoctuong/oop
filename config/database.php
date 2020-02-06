@@ -6,7 +6,7 @@ class Database
   private $database   = "php_oop_crud_level_1";
   private $username   = "root";
   private $password   = "";
-  function __construct()
+  function getConnection()
 	{
 	try {
 	  $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->database", $this->username, $this->password);
@@ -14,7 +14,7 @@ class Database
 		} catch (PDOException $e) {
 		  echo "Connection failed: " . $e->getMessage();
 		}		
+		return $this->conn;
 	}
-	return $this->conn;
 }
 ?>
