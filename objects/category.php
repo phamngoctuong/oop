@@ -17,7 +17,7 @@
 	    $stmt->bindParam(1, $this->id);
 	    $stmt->execute();
 	    $row        = $stmt->fetch(PDO::FETCH_ASSOC);
-	    $this->name = $row['name'];
+	    return $this->name = $row['name'];
 	  }
 		public function read()
 	  {
