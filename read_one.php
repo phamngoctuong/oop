@@ -33,21 +33,21 @@ $product->readOne();
   <tr>
     <td>Category</td>
     <td>
-      <?php
-          $category->id = $product->category_id;
-          $category->readName();
-          echo $category->name;
-        ?>
+    	<?php
+$category->id = $product->category_id;
+$category->readName();
+echo $category->name;
+?>
     </td>
   </tr>
   <tr>
     <td>Image</td>
     <td>
-        <?php
+    		<?php
 echo $product->image ? "<img src='uploads/{$product->image}' style='width:300px;' />" : "No image found.";
 ?>
     </td>
-  </tr>
+	</tr>
 </table>
 <?php
 include_once "layout_footer.php";

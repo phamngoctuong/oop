@@ -21,8 +21,8 @@ if ($_POST) {
   $image                = !empty($_FILES["image"]["name"]) ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
   $product->image       = $image;
   if ($product->create()) {
+    echo $product->uploadPhoto();
     echo "<div class='alert alert-success'>Product was created.</div>";
-    $product->uploadPhoto();
   } else {
     echo "<div class='alert alert-danger'>Unable to create product.</div>";
   }
@@ -46,21 +46,21 @@ if ($_POST) {
       <td>Category</td>
       <td>
         <?php
-          $stmt = $category->read();
-          echo "<select class='form-control' name='category_id'>";
-          echo "<option>Select category...</option>";
-          while ($row_category = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            extract($row_category);
-            echo "<option value='{$id}'>{$name}</option>";
-          }
-          echo "</select>";
-        ?>
+					$stmt = $category->read();
+					echo "<select class='form-control' name='category_id'>";
+					echo "<option>Select category...</option>";
+					while ($row_category = $stmt->fetch(PDO::FETCH_ASSOC)) {
+					  extract($row_category);
+					  echo "<option value='{$id}'>{$name}</option>";
+					}
+					echo "</select>";
+				?>
       </td>
     </tr>
     <tr>
-        <td>Photo</td>
-        <td><input type="file" name="image" /></td>
-    </tr>
+		    <td>Photo</td>
+		    <td><input type="file" name="image" /></td>
+		</tr>
     <tr>
       <td></td>
       <td>

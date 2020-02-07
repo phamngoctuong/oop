@@ -1,14 +1,14 @@
 <?php
-	$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
-	include_once 'config/database.php';
-	include_once 'objects/product.php';
-	include_once 'objects/category.php';
-	$database    = new Database();
-	$db          = $database->getConnection();
-	$product     = new Product($db);
-	$category    = new Category($db);
-	$product->id = $id;
-	$product->readOne();
+$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+include_once 'config/database.php';
+include_once 'objects/product.php';
+include_once 'objects/category.php';
+$database    = new Database();
+$db          = $database->getConnection();
+$product     = new Product($db);
+$category    = new Category($db);
+$product->id = $id;
+$product->readOne();
 ?>
 <?php
 if ($_POST) {
@@ -49,23 +49,23 @@ if ($_POST) {
 	      <td>Category</td>
 	      <td>
 	        <?php
-						$stmt = $category->read();
-					?>
+$stmt = $category->read();
+?>
 					<select class='form-control' name='category_id'>
 					  <option>Please select...</option>
 
 						<?php
-							while ($row_category = $stmt->fetch(PDO::FETCH_ASSOC)) {
-							  $category_id   = $row_category['id'];
-							  $category_name = $row_category['name'];
-							  if ($product->category_id == $category_id) {
-							    echo "<option value='$category_id' selected>";
-							  } else {
-							    echo "<option value='$category_id'>";
-							  }
-							  echo "$category_name</option>";
-							}
-						?>
+while ($row_category = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  $category_id   = $row_category['id'];
+  $category_name = $row_category['name'];
+  if ($product->category_id == $category_id) {
+    echo "<option value='$category_id' selected>";
+  } else {
+    echo "<option value='$category_id'>";
+  }
+  echo "$category_name</option>";
+}
+?>
 					</select>
 	      </td>
 	    </tr>

@@ -1,26 +1,37 @@
-    </div>
-  <script src="http://localhost/jquery.js"></script>
-  <script src="http://localhost/oop/libs/js/messagebox.js"></script>
-  <script>
-    $(document).ready(function() {
-      $(".demo-2").click(function() {
-        var id = $(this).attr('delete-id');
-        $.MessageBox({
-          buttonDone: "Yes",
-          buttonFail: "No",
-          message: "Are You Sure?"
-        }).done(function() {
-          $.ajax({
-            url: 'delete_product.php',
-            type: 'POST',
-            data: {object_id: id},
-            success: function(data) {
-              $('a[delete-id="'+data+'"]').parents('tr').hide();
-            }
-          });
+	</div>
+<script src="http://localhost/jquery.js"></script>
+<script src="http://localhost/js/bootstrap.min.js"></script>
+<script src="http://localhost/bootbox.min.js"></script>
+<script>
+// JavaScript for deleting product
+$(document).on('click', '.delete-object', function() {
+  var id = $(this).attr('delete-id');
+  bootbox.confirm({
+    message: "<h4>Are you sure?</h4>",
+    buttons: {
+      confirm: {
+        label: '<span class="glyphicon glyphicon-ok"></span> Yes',
+        className: 'btn-danger'
+      },
+      cancel: {
+        label: '<span class="glyphicon glyphicon-remove"></span> No',
+        className: 'btn-primary'
+      }
+    },
+    callback: function(result) {
+      if (result == true) {
+        $.post('delete_product.php', {
+          object_id: id
+        }, function(data) {
+          location.reload();
+        }).fail(function() {
+          alert('Unable to delete.');
         });
-      });
-    });
-  </script>
+      }
+    }
+  });
+  return false;
+});
+</script>
 </body>
 </html>
