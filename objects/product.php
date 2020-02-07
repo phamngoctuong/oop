@@ -35,9 +35,10 @@ class Product
     $stmt->execute();
     return $stmt;
   }
-  public function delete() {
-  	$query = "DELETE FROM {$this->table} WHERE id={$this->id}";
-  	$stmt  = $this->conn->prepare($query);
+  public function delete()
+  {
+    $query = "DELETE FROM {$this->table} WHERE id={$this->id}";
+    $stmt  = $this->conn->prepare($query);
     if ($stmt->execute()) {
       return true;
     } else {
@@ -53,7 +54,7 @@ class Product
     $this->description = htmlspecialchars(strip_tags($this->description));
     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
     $this->image       = htmlspecialchars(strip_tags($this->image));
-    $this->created   = date('Y-m-d H:i:s');
+    $this->created     = date('Y-m-d H:i:s');
     $stmt->bindParam(":name", $this->name);
     $stmt->bindParam(":price", $this->price);
     $stmt->bindParam(":description", $this->description);
@@ -66,7 +67,8 @@ class Product
       return false;
     }
   }
-  public function uploadPhoto() {
+  public function uploadPhoto()
+  {
     $result_message = "";
     if ($this->image) {
       $target_directory           = "uploads/";
@@ -93,14 +95,13 @@ class Product
       }
       if (empty($file_upload_error_messages)) {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-
-        }else {
+        } else {
           $result_message .= "<div class='alert alert-danger'>";
           $result_message .= "<div>Unable to upload photo.</div>";
           $result_message .= "<div>Update the record to upload photo.</div>";
           $result_message .= "</div>";
         }
-      }else {
+      } else {
         $result_message .= "<div class='alert alert-danger'>";
         $result_message .= "{$file_upload_error_messages}";
         $result_message .= "<div>Update the record to upload photo.</div>";
@@ -108,5 +109,21 @@ class Product
       }
     }
     return $result_message;
+  }
+  public function update()
+  {
+    $query = "UPDATE {$this->table} SET name=:name, description=:description, image=:image, price=:price, category_id=:category_id WHERE id=:id";
+    $stmt  = $this->conn->prepare($query);
+    $stmt->bindParam(":name", $this->name);
+    $stmt->bindParam(":description", $this->description);
+    $stmt->bindParam(":image", $this->image);
+    $stmt->bindParam(":price", $this->price);
+    $stmt->bindParam(":category_id", $this->category_id);
+    $stmt->bindParam(":id", $this->id);
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
