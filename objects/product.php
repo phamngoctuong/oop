@@ -30,10 +30,16 @@ class Product
   }
   public function readOne()
   {
-    $query = "SELECT * FROM {$this->table} WHERE id={$this->id}";
+    $query = "SELECT name, price, description, category_id, image FROM " . $this->table . " WHERE id = ? LIMIT 0,1";
     $stmt  = $this->conn->prepare($query);
+    $stmt->bindParam(1, $this->id);
     $stmt->execute();
-    return $stmt;
+    $row               = $stmt->fetch(PDO::FETCH_ASSOC);
+    $this->name        = $row['name'];
+    $this->price       = $row['price'];
+    $this->description = $row['description'];
+    $this->category_id = $row['category_id'];
+    $this->image       = $row['image'];
   }
   public function delete()
   {

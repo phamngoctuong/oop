@@ -10,13 +10,15 @@
 		{
 			$this->conn = $db;
 		}
-		public function readName() {
-			$query = "SELECT * FROM {$this->table} WHERE id={$this->id}";
-			$stmt  = $this->conn->prepare($query);
+		public function readName()
+	  {
+	    $query = "SELECT name FROM " . $this->table . " WHERE id = ? limit 0,1";
+	    $stmt  = $this->conn->prepare($query);
+	    $stmt->bindParam(1, $this->id);
 	    $stmt->execute();
-	    $array = $stmt->fetch(PDO::FETCH_ASSOC);
-	    return $array['name'];
-		}
+	    $row        = $stmt->fetch(PDO::FETCH_ASSOC);
+	    $this->name = $row['name'];
+	  }
 		public function read()
 	  {
 	    $query = "SELECT id, name FROM " . $this->table . " ORDER BY name";
